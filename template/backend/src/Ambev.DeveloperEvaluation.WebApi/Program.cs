@@ -8,6 +8,7 @@ using Ambev.DeveloperEvaluation.ORM;
 using Ambev.DeveloperEvaluation.WebApi.Middleware;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 
 namespace Ambev.DeveloperEvaluation.WebApi;
@@ -40,7 +41,9 @@ public class Program
 
             builder.RegisterDependencies();
 
-            builder.Services.AddAutoMapper(typeof(Program).Assembly, typeof(ApplicationLayer).Assembly);
+            builder.Services.AddAutoMapper(cfg => { },
+                        typeof(Program).Assembly,
+                        typeof(ApplicationLayer).Assembly);
 
             builder.Services.AddMediatR(cfg =>
             {
