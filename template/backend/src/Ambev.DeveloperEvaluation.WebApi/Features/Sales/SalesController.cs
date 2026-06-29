@@ -61,7 +61,7 @@ public class SalesController : BaseController
         if (!validationResult.IsValid)
             return BadRequest(validationResult.Errors);
 
-        var command = _mapper.Map<GetSaleCommand>(id);
+        var command = new GetSaleCommand { Id = id };
         var result = await _mediator.Send(command, cancellationToken);
 
         return Ok(new ApiResponseWithData<GetSaleResponse>
@@ -107,7 +107,7 @@ public class SalesController : BaseController
         if (!validationResult.IsValid)
             return BadRequest(validationResult.Errors);
 
-        var command = _mapper.Map<DeleteSaleCommand>(id);
+        var command = new DeleteSaleCommand { Id = id };
         await _mediator.Send(command, cancellationToken);
 
         return Ok(new ApiResponse
